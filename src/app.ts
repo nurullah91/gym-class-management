@@ -2,10 +2,12 @@ import express, { Application } from "express";
 import cors from "cors";
 import notFound from "./app/middleware/notFound";
 import globalErrorHandler from "./app/middleware/globalErrorHandler";
+import router from "./app/routes";
 
 const app: Application = express();
 
 app.use(express.json());
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -13,8 +15,8 @@ app.use(
   })
 );
 
-// TODO
 // application route
+app.use("/api/", router);
 
 // HTML content for home page of the live server
 app.get("/", (req, res) => {
