@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     style="margin: -8px;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right,rgb(255, 64, 0),rgb(254, 250, 146)); 
+    background: linear-gradient(to right,rgb(153, 0, 255),rgb(248, 80, 68)); 
     height: 100vh; 
     display: flex; 
     justify-content: center; 
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
     >
      <div 
      style="text-align: center; 
-     background-color: rgba(101, 108, 193, 0.9); padding: 50px; 
+     background-color: rgba(134, 224, 205, 0.9); padding: 50px; 
      margin: auto 20px; 
      border-radius: 15px; 
      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 
         <p 
         style="font-size: 1.2em; 
-        color: #666; 
+        color: #444; 
         margin: 20px 0;"
         >
             We're excited to have you here. Explore our features and api's for Making your website more dynamic, real and user friendly!
@@ -59,6 +59,9 @@ app.get("/", (req, res) => {
 
 // Global routes
 app.use(globalErrorHandler);
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 app.use(notFound);
 
 export default app;

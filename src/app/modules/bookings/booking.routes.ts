@@ -7,7 +7,6 @@ import { BookingControllers } from "./booking.controller";
 const router = express.Router();
 
 // Only Admin can delete and update a booking, Every authenticated user can create booking
-
 router.post(
   "/",
   checkAuth("trainee"),

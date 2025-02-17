@@ -26,9 +26,9 @@ router.get(
 );
 
 router.get(
-  "/all-schedule/:trainerId",
+  "/trainer-schedule/:trainerId",
   checkAuth("admin", "trainee", "trainer"),
-  ScheduleControllers.getAvailableSchedules
+  ScheduleControllers.getTrainerSchedules
 );
 
 router.get(

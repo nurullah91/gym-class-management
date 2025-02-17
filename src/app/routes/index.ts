@@ -11,7 +11,7 @@ const allRoutes = [
     route: UserRoutes,
   },
   {
-    path: "/schedule",
+    path: "/schedules",
     route: ScheduleRoutes,
   },
   {

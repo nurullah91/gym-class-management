@@ -23,7 +23,7 @@ const getAllSchedules = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     message: "All schedules are retrieved successfully",
     meta: result.meta,
-    data: result.meta,
+    data: result.result,
   });
 });
 

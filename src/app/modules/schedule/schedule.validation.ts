@@ -14,8 +14,7 @@ const timeStringSchema = z.string().refine(
 const createScheduleSchema = z
   .object({
     scheduleName: z.string().max(100),
-    trainerId: z.string(),
-
+    trainer: z.string(),
     date: z
       .string()
       .nonempty({ message: "Date is required" })
@@ -59,6 +58,7 @@ const createScheduleSchema = z
 const updateScheduleSchema = z
   .object({
     scheduleName: z.string().optional(),
+    trainer: z.string().optional(),
     date: z
       .string()
       .nonempty({ message: "Date is required" })

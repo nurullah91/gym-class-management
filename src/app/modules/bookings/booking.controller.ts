@@ -20,7 +20,7 @@ const getAllBookings = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     message: "All bookings are retrieved successfully",
     meta: result.meta,
-    data: result.meta,
+    data: result.result,
   });
 });
 

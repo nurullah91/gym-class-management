@@ -14,7 +14,10 @@ const checkAuth = (...requiredRoles: TUserRole[]) => {
 
     // check if the token missing
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized access");
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        "You are not authorized for this request"
+      );
     }
 
     // check if the token is valid

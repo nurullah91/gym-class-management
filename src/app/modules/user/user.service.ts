@@ -27,6 +27,10 @@ const getAllUserFromDB = async (query: Record<string, unknown>) => {
     result,
   };
 };
+const getSingleUserFromDB = async (userId: string) => {
+  const result = await User.findById(userId);
+  return result;
+};
 
 const loginUserWithEmail = async (payload: TUserLogin) => {
   // check user exist or not
@@ -89,6 +93,7 @@ const deleteUserIntoDB = async (userId: string) => {
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
+  getSingleUserFromDB,
   loginUserWithEmail,
   deleteUserIntoDB,
   updateUserIntoDB,

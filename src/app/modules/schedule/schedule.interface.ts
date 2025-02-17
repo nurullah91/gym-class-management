@@ -6,9 +6,9 @@ export interface ISchedule {
   trainer: Types.ObjectId;
   trainees: string[];
   totalBooked: number;
-  date: Date;
-  startTime: Date;
-  endTime: Date;
+  date: string;
+  startTime: string;
+  endTime: string;
   capacity: number;
   isDeleted: boolean;
   createdAt: Date;

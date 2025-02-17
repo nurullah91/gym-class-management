@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ErrorRequestHandler } from "express";
 import { ZodError } from "zod";
 import handleZodError from "../errors/handleZodError";
@@ -8,7 +10,8 @@ import handleCastError from "../errors/handleCastError";
 import config from "../config";
 import { TErrorDetails } from "../interface/error";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   // default value
   let statusCode = 500;
@@ -63,7 +66,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   return res.status(statusCode).json({
     success: false,
     message,
-    errorSources: errorDetails,
+    errorDetails,
     err,
     stack: config.NODE_ENV === "development" ? err?.stack : null,
   });
