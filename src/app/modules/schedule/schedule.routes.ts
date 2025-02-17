@@ -16,13 +16,18 @@ router.post(
 router.get(
   "/",
   checkAuth("admin", "trainee", "trainer"),
-
   ScheduleControllers.getAllSchedules
 );
+
+router.get(
+  "/all-schedule/available",
+  checkAuth("admin", "trainee", "trainer"),
+  ScheduleControllers.getAvailableSchedules
+);
+
 router.get(
   "/:scheduleId",
   checkAuth("admin", "trainee", "trainer"),
-
   ScheduleControllers.getSingleSchedule
 );
 

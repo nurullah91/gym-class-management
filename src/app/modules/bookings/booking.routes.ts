@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post(
   "/",
-  checkAuth("admin", "trainer", "trainee"),
+  checkAuth("trainee"),
   validateRequest(BookingSchemas.createBookingSchema),
   BookingControllers.createBooking
 );
@@ -29,7 +29,7 @@ router.get(
 
 router.patch(
   "/:bookingId",
-  checkAuth("admin"),
+  checkAuth("admin", "trainer", "trainee"),
   validateRequest(BookingSchemas.updateBookingSchema),
   BookingControllers.updateBooking
 );

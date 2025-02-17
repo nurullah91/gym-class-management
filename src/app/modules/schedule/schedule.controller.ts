@@ -22,11 +22,12 @@ const getAllSchedules = catchAsync(async (req, res) => {
     success: true,
     statusCode: httpStatus.OK,
     message: "All schedules are retrieved successfully",
-    data: result,
+    meta: result.meta,
+    data: result.meta,
   });
 });
 
-// Available schedule
+// All Available schedule
 const getAvailableSchedules = catchAsync(async (req, res) => {
   const result = await ScheduleServices.getAvailableSchedulesFromDB(req.query);
 
@@ -34,7 +35,25 @@ const getAvailableSchedules = catchAsync(async (req, res) => {
     success: true,
     statusCode: httpStatus.OK,
     message: "All available schedules are retrieved successfully",
-    data: result,
+    meta: result.meta,
+    data: result.result,
+  });
+});
+
+// Trainer schedule
+const getTrainerSchedules = catchAsync(async (req, res) => {
+  const { trainerId } = req.params;
+  const result = await ScheduleServices.getTrainersSchedulesFromDB(
+    req.query,
+    trainerId
+  );
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All schedules of the trainer are retrieved successfully",
+    meta: result.meta,
+    data: result.result,
   });
 });
 
@@ -80,6 +99,7 @@ const deleteSchedule = catchAsync(async (req, res) => {
 export const ScheduleControllers = {
   createSchedule,
   getAllSchedules,
+  getTrainerSchedules,
   getAvailableSchedules,
   getSingleSchedule,
   updateSingleSchedule,
