@@ -1,12 +1,28 @@
 import { Booking } from "./booking.model";
 import { IBooking } from "./booking.interface";
+import QueryBuilder from "../../utils/QueryBuilder";
 
 const createBookingIntoDB = async (data: IBooking) => {
   return await Booking.create(data);
 };
 
-const getAllBookingsFromDB = async () => {
-  return await Booking.find().populate("user schedule");
+const getAllBookingsFromDB = async (query: Record<string, unknown>) => {
+  const bookingQuery = new QueryBuilder(
+    Booking.find().populate("user").populate("schedule"),
+    query
+  )
+    .search(["phone"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await bookingQuery.countTotal();
+  const result = await bookingQuery.modelQuery;
+  return {
+    meta,
+    result,
+  };
 };
 
 const getSingleBookingFromDB = async (id: string) => {

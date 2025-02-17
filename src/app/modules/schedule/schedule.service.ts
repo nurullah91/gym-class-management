@@ -1,12 +1,50 @@
 import { Schedule } from "./schedule.model";
 import { ISchedule } from "./schedule.interface";
+import QueryBuilder from "../../utils/QueryBuilder";
 
 const createScheduleIntoDB = async (data: ISchedule) => {
   return await Schedule.create(data);
 };
 
-const getAllSchedulesFromDB = async () => {
-  return await Schedule.find().populate("trainer trainees");
+const getAllSchedulesFromDB = async (query: Record<string, unknown>) => {
+  const scheduleQuery = new QueryBuilder(
+    Schedule.find().populate("trainer").populate("trainees"),
+    query
+  )
+    .search(["scheduleName"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await scheduleQuery.countTotal();
+  const result = await scheduleQuery.modelQuery;
+  return {
+    meta,
+    result,
+  };
+};
+
+const getAvailableSchedulesFromDB = async (query: Record<string, unknown>) => {
+  // Get only that schedule which booking is less than 10
+  const scheduleQuery = new QueryBuilder(
+    Schedule.find({ totalBooked: { $lt: 10 } })
+      .populate("trainer")
+      .populate("trainees"),
+    query
+  )
+    .search(["scheduleName"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await scheduleQuery.countTotal();
+  const result = await scheduleQuery.modelQuery;
+  return {
+    meta,
+    result,
+  };
 };
 
 const getSingleSchedule = async (id: string) => {
@@ -32,6 +70,7 @@ const deleteScheduleIntoDB = async (scheduleId: string) => {
 };
 export const ScheduleServices = {
   createScheduleIntoDB,
+  getAvailableSchedulesFromDB,
   getAllSchedulesFromDB,
   getSingleSchedule,
   updateScheduleIntoDB,

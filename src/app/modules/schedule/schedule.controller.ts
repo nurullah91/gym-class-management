@@ -14,13 +14,26 @@ const createSchedule = catchAsync(async (req, res) => {
   });
 });
 
+// All schedule
 const getAllSchedules = catchAsync(async (req, res) => {
-  const result = await ScheduleServices.getAllSchedulesFromDB();
+  const result = await ScheduleServices.getAllSchedulesFromDB(req.query);
 
   res.status(httpStatus.OK).json({
     success: true,
     statusCode: httpStatus.OK,
     message: "All schedules are retrieved successfully",
+    data: result,
+  });
+});
+
+// Available schedule
+const getAvailableSchedules = catchAsync(async (req, res) => {
+  const result = await ScheduleServices.getAvailableSchedulesFromDB(req.query);
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All available schedules are retrieved successfully",
     data: result,
   });
 });
@@ -51,6 +64,7 @@ const updateSingleSchedule = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const deleteSchedule = catchAsync(async (req, res) => {
   const { scheduleId } = req.params;
   const result = await ScheduleServices.deleteScheduleIntoDB(scheduleId);
@@ -66,6 +80,7 @@ const deleteSchedule = catchAsync(async (req, res) => {
 export const ScheduleControllers = {
   createSchedule,
   getAllSchedules,
+  getAvailableSchedules,
   getSingleSchedule,
   updateSingleSchedule,
   deleteSchedule,

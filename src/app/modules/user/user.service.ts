@@ -4,11 +4,28 @@ import { User } from "./user.model";
 import AppError from "../../errors/AppError";
 import { createToken } from "./user.utils";
 import config from "../../config";
+import QueryBuilder from "../../utils/QueryBuilder";
 
 const createUserIntoDB = async (payload: IUser) => {
   const userInfo = { ...payload, role: "trainee" };
   const result = User.create(userInfo);
   return result;
+};
+
+const getAllUserFromDB = async (query: Record<string, unknown>) => {
+  const userQuery = new QueryBuilder(User.find(), query)
+    .search(["name", "email", "phone", "address"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await userQuery.countTotal();
+  const result = await userQuery.modelQuery;
+  return {
+    meta,
+    result,
+  };
 };
 
 const loginUserWithEmail = async (payload: TUserLogin) => {
@@ -71,6 +88,7 @@ const deleteUserIntoDB = async (userId: string) => {
 };
 export const UserServices = {
   createUserIntoDB,
+  getAllUserFromDB,
   loginUserWithEmail,
   deleteUserIntoDB,
   updateUserIntoDB,
