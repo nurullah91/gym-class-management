@@ -10,6 +10,20 @@ The system enforces several business rules to ensure smooth operations. Admins a
 2. Schedule Model
 3. Booking Model
 
+#### **Entity Relationship Diagram Diagram**
+
+![ER DIAGRAM](./er-diagram.png)
+Description: This is an updated diagram illustrates the relationships among User, Schedule, and Bookings.
+
+Here is the lucid chard link of model diagram [link](https://lucid.app/lucidchart/92b6f7c7-0652-4baa-811c-9be3fc129533/edit?viewport_loc=-157%2C-446%2C2488%2C1142%2C0_0&invitationId=inv_06581349-aabb-40be-8a4b-3f362d16d7a0)
+
+---
+
+**Postman collection for API endpoints**
+![POSTMAN COLLECTION](./Gym-class-Management.postman_collection.json)
+
+Description: This is a postman collection of all the API endpoints.Download this , and import it in your postman if you needed. If you cannot download from here. Also you will find the postman collection in the root directory of the code
+
 ---
 
 - **No Data found response:**
