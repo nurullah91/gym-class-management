@@ -42,6 +42,11 @@ const userSchema = new Schema<IUser, UserModel>(
       default: "trainee",
       enum: ["trainer", "trainee", "admin"],
     },
+    enrolledPlan: {
+      type: String,
+      required: true,
+      enum: ["basic", "premium"],
+    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -93,4 +98,4 @@ userSchema.post("save", function (doc, next) {
   next();
 });
 
-export const User = model<IUser, UserModel>("Users", userSchema);
+export const User = model<IUser, UserModel>("User", userSchema);

@@ -16,6 +16,11 @@ const userValidationSchema = z.object({
     .string()
     .nonempty({ message: "Cover photo cannot be empty" })
     .optional(),
+  enrolledPlan: z
+    .enum(["basic", "premium"], {
+      message: "Enrolled Plan must be either basic or premium",
+    })
+    .optional(),
 });
 
 const updateUserValidationSchema = z.object({
@@ -41,6 +46,11 @@ const updateUserValidationSchema = z.object({
   role: z
     .enum(["user", "admin"], {
       message: "Role must be either user or admin",
+    })
+    .optional(),
+  enrolledPlan: z
+    .enum(["basic", "premium"], {
+      message: "Enrolled Plan must be either basic or premium",
     })
     .optional(),
   isDeleted: z.boolean({ message: "isDeleted must be boolean" }).optional(),

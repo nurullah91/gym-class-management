@@ -10,6 +10,7 @@ export interface IUser {
   address: string;
   profilePhoto: string;
   coverPhoto: string;
+  enrolledPlan: "basic" | "premium";
   role: "admin" | "trainee" | "trainer";
   isDeleted: boolean;
   createdAt: Date;
