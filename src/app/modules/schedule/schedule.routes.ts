@@ -26,6 +26,12 @@ router.get(
 );
 
 router.get(
+  "/all-schedule/:trainerId",
+  checkAuth("admin", "trainee", "trainer"),
+  ScheduleControllers.getAvailableSchedules
+);
+
+router.get(
   "/:scheduleId",
   checkAuth("admin", "trainee", "trainer"),
   ScheduleControllers.getSingleSchedule

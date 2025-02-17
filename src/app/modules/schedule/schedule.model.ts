@@ -16,24 +16,4 @@ const scheduleSchema = new Schema<ISchedule>(
   { timestamps: true }
 );
 
-// Enforce business rule: Max 5 schedules per day per trainer
-scheduleSchema.pre("validate", async function (next) {
-  const startOfDay = new Date(this.startTime);
-  startOfDay.setHours(0, 0, 0, 0);
-  const endOfDay = new Date(this.startTime);
-  endOfDay.setHours(23, 59, 59, 999);
-
-  const scheduleCount = await Schedule.countDocuments({
-    trainerId: this.trainer,
-    startTime: { $gte: startOfDay, $lte: endOfDay },
-  });
-
-  if (scheduleCount >= 5) {
-    return next(
-      new Error("Trainer cannot have more than 5 schedules per day.")
-    );
-  }
-  next();
-});
-
 export const Schedule = mongoose.model<ISchedule>("Schedule", scheduleSchema);
